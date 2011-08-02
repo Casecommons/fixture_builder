@@ -95,7 +95,7 @@ module FixtureBuilder
     end
 
     def print_out(message)
-      print_out message unless quiet
+      puts message unless quiet
     end
 
     def surface_errors
