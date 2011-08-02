@@ -4,11 +4,12 @@ require 'fileutils'
 
 module FixtureBuilder
   class Configuration
-    attr_accessor :select_sql, :delete_sql, :skip_tables, :files_to_check, :record_name_fields, :fixture_builder_file, :after_build
+    attr_accessor :select_sql, :delete_sql, :skip_tables, :files_to_check, :record_name_fields, :fixture_builder_file, :after_build, :quiet
 
     SCHEMA_FILES = ['db/schema.rb', 'db/development_structure.sql', 'db/test_structure.sql', 'db/production_structure.sql']
 
     def initialize
+      @quiet = false
       @custom_names = {}
       @model_name_procs = {}
       @file_hashes = file_hashes
@@ -90,17 +91,21 @@ module FixtureBuilder
     private
 
     def say(*messages)
-      puts messages.map { |message| "=> #{message}" }
+      print_out messages.map { |message| "=> #{message}" }
+    end
+
+    def print_out(message)
+      print_out message unless quiet
     end
 
     def surface_errors
       yield
     rescue Object => error
-      puts
+      print_out
       say "There was an error building fixtures", error.inspect
-      puts
-      puts error.backtrace
-      puts
+      print_out
+      print_out error.backtrace
+      print_out
       exit!
     end
 
