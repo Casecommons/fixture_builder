@@ -2,14 +2,12 @@ PATH
   remote: .
   specs:
     fixture_builder (0.2.2)
-      active_support
+      activesupport
 
 GEM
   remote: http://rubygems.org/
   specs:
-    active_support (3.0.0)
-      activesupport (= 3.0.0)
-    activesupport (3.0.0)
+    activesupport (3.0.9)
     rake (0.8.7)
     test-unit (2.3.0)
 
