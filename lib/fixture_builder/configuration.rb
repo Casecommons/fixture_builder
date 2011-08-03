@@ -94,7 +94,7 @@ module FixtureBuilder
       print_out messages.map { |message| "=> #{message}" }
     end
 
-    def print_out(message)
+    def print_out(message = "")
       puts message unless quiet
     end
 
